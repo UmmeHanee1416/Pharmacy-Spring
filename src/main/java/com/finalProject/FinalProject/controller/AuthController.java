@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -69,6 +70,9 @@ public class AuthController {
 //                                   userDetails.getUsername(),
 //                                   userDetails.getEmail(),
 //                                   roles));
+
+
+
         String token = jwtUtils.generateJwtToken(userDetails);
 
         return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())

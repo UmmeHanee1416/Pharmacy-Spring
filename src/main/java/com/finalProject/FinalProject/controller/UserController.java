@@ -49,6 +49,11 @@ public class UserController {
         return ResponseEntity.ok(userService.get(userName));
     }
 
+    @GetMapping("/getId/{id}")
+    public ResponseEntity<UserDto> getUserById(@PathVariable(name = "id") final Long id) {
+        return ResponseEntity.ok(userService.getById(id));
+    }
+
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody final UserDto userDto)
             throws MethodArgumentNotValidException {
@@ -87,5 +92,7 @@ public class UserController {
         userService.delete(userName);
         return ResponseEntity.noContent().build();
     }
+
+
 
 }

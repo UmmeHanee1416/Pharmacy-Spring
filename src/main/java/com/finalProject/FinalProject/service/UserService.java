@@ -124,4 +124,9 @@ public class UserService {
         return userRepository.existsByEmailIgnoreCase(email);
     }
 
+    public UserDto getById(Long id) {
+        UserDto userDto = new UserDto();
+        mapToDTO(userRepository.findById(id).get(),userDto);
+        return userDto;
+    }
 }

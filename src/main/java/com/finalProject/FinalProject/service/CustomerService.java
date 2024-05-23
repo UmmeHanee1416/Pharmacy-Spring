@@ -31,32 +31,24 @@ public class CustomerService {
             sales.setEmpId(employeeRepo.findById(customerDTO.getEmpId()).get());
             maptoDTO(salesRepo.save(sales), new SalesDTO());
             int abc = 0;
-            for (SalesDetailDTO s: customerDTO.getSalesDetailDTOS()) {
-                abc += s.getProductQuantity();
-            }
-            sales.setTotalQuantity(abc);
             int a =  0;
             for (SalesDetailDTO s: customerDTO.getSalesDetailDTOS()) {
+                abc += s.getProductQuantity();
                 SalesDetail salesDetail = new SalesDetail();
                 maptoEntity(s,salesDetail);
                 Product product = productRepo.findById(salesDetail.getProductId().getTradeName()).get();
                 a += (product.getSellPrice() * s.getProductQuantity()) ;
-            }
-            sales.setTotalCharge(a);
-            updateData(sales.getId(), sales);
-            for (SalesDetailDTO s: customerDTO.getSalesDetailDTOS()) {
-                Product product = productRepo.findById(s.getProductId()).get();
                 productRepo.updateProduct((product.getRemainedQuantity() - s.getProductQuantity()), (product.getSoldQuantity()!=null?product.getSoldQuantity():0) + s.getProductQuantity(), product.getTradeName());
                 Set<Generic> generics = product.getGenerics();
                 for (Generic g: generics) {
                     genericRepo.updateGenericRegister((g.getRegisteredQuantity()!=null?g.getRegisteredQuantity():0)-(s.getProductQuantity()), g.getId());
                 }
-            }
-            for (SalesDetailDTO s: customerDTO.getSalesDetailDTOS()) {
-                SalesDetail salesDetail = new SalesDetail();
                 salesDetail.setSalesId(salesRepo.findById(sales.getId()).get());
                 maptoDTO(salesDetailRepo.save(maptoEntity(s,salesDetail)), new SalesDetailDTO());
             }
+            sales.setTotalQuantity(abc);
+            sales.setTotalCharge(a);
+            updateData(sales.getId(), sales);
             InvoiceDTO invoiceDTO = new InvoiceDTO();
             invoiceDTO.setSalesId(salesRepo.findById(sales.getId()).get().getId());
             invoiceDTO.setCustomerId(customerRepo.findById(customerDTO.getContact()).get().getContact());
@@ -69,32 +61,24 @@ public class CustomerService {
             sales.setEmpId(employeeRepo.findById(customerDTO.getEmpId()).get());
             maptoDTO(salesRepo.save(sales), new SalesDTO());
             int abc = 0;
-            for (SalesDetailDTO s: customerDTO.getSalesDetailDTOS()) {
-                abc += s.getProductQuantity();
-            }
-            sales.setTotalQuantity(abc);
             int a =  0;
             for (SalesDetailDTO s: customerDTO.getSalesDetailDTOS()) {
+                abc += s.getProductQuantity();
                 SalesDetail salesDetail = new SalesDetail();
                 maptoEntity(s,salesDetail);
                 Product product = productRepo.findById(salesDetail.getProductId().getTradeName()).get();
                 a += (product.getSellPrice() * s.getProductQuantity()) ;
-            }
-            sales.setTotalCharge(a);
-            updateData(sales.getId(), sales);
-            for (SalesDetailDTO s: customerDTO.getSalesDetailDTOS()) {
-                Product product = productRepo.findById(s.getProductId()).get();
                 productRepo.updateProduct((product.getRemainedQuantity() - s.getProductQuantity()), (product.getSoldQuantity()!=null?product.getSoldQuantity():0) + s.getProductQuantity(), product.getTradeName());
                 Set<Generic> generics = product.getGenerics();
                 for (Generic g: generics) {
                     genericRepo.updateGenericRegister((g.getRegisteredQuantity()!=null?g.getRegisteredQuantity():0)-(s.getProductQuantity()), g.getId());
                 }
-            }
-            for (SalesDetailDTO s: customerDTO.getSalesDetailDTOS()) {
-                SalesDetail salesDetail = new SalesDetail();
                 salesDetail.setSalesId(salesRepo.findById(sales.getId()).get());
                 maptoDTO(salesDetailRepo.save(maptoEntity(s,salesDetail)), new SalesDetailDTO());
             }
+            sales.setTotalQuantity(abc);
+            sales.setTotalCharge(a);
+            updateData(sales.getId(), sales);
             InvoiceDTO invoiceDTO = new InvoiceDTO();
             invoiceDTO.setSalesId(salesRepo.findById(sales.getId()).get().getId());
             invoiceDTO.setCustomerId(customerRepo.findById(customerDTO.getContact()).get().getContact());
