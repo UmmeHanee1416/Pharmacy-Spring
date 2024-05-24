@@ -43,12 +43,16 @@ public class CustomerService {
                 for (Generic g: generics) {
                     genericRepo.updateGenericRegister((g.getRegisteredQuantity()!=null?g.getRegisteredQuantity():0)-(s.getProductQuantity()), g.getId());
                 }
-                salesDetail.setSalesId(sales);
-                maptoDTO(salesDetailRepo.save(maptoEntity(s,salesDetail)), new SalesDetailDTO());
+
             }
             sales.setTotalQuantity(abc);
             sales.setTotalCharge(a);
             updateData(sales.getId(), sales);
+            for (SalesDetailDTO s: customerDTO.getSalesDetailDTOS()) {
+                SalesDetail salesDetail = new SalesDetail();
+                salesDetail.setSalesId(sales);
+                maptoDTO(salesDetailRepo.save(maptoEntity(s,salesDetail)), new SalesDetailDTO());
+            }
             InvoiceDTO invoiceDTO = new InvoiceDTO();
             invoiceDTO.setSalesId(salesRepo.findById(sales.getId()).get().getId());
             invoiceDTO.setCustomerId(customerRepo.findById(customerDTO.getContact()).get().getContact());
