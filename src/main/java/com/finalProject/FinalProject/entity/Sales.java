@@ -31,11 +31,4 @@ public class Sales extends Base{
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "salesId", referencedColumnName = "id")
     private Set<Invoice> invoice;
-//    public void setTotalQuantity(SalesDetail salesDetail) {
-//        this.totalQuantity += salesDetail.getProductQuantity();
-//    }
-
-//    public void setTotalCharge(SalesDetail salesDetail) {
-//        this.totalCharge += salesDetail.getTotalCharge();
-//    }
 }
