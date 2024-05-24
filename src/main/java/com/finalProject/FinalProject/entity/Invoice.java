@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.CreationTimestamp;
+
 import java.time.LocalDate;
 
 @Entity
@@ -25,6 +27,7 @@ public class Invoice extends Base{
     @JoinColumn(name = "customerId")
     private Customer customerId;
     private Integer soldQty;
+    @CreationTimestamp
     private LocalDate saleDate;
 
 }

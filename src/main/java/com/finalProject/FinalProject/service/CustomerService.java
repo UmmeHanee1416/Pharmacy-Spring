@@ -57,7 +57,6 @@ public class CustomerService {
             invoiceDTO.setSalesId(salesRepo.findById(sales.getId()).get().getId());
             invoiceDTO.setCustomerId(customerRepo.findById(customerDTO.getContact()).get().getContact());
             invoiceDTO.setSoldQty(abc);
-            invoiceDTO.setSaleDate(sales.getCreatedAt());
             addData(invoiceDTO);
         } else {
             Sales sales  = new Sales();
@@ -87,7 +86,6 @@ public class CustomerService {
             invoiceDTO.setSalesId(salesRepo.findById(sales.getId()).get().getId());
             invoiceDTO.setCustomerId(customerRepo.findById(customerDTO.getContact()).get().getContact());
             invoiceDTO.setSoldQty(abc);
-            invoiceDTO.setSaleDate(customerRepo.findById(customerDTO.getContact()).get().getPurchaseDate());
             addData(invoiceDTO);
         }
         return null;
