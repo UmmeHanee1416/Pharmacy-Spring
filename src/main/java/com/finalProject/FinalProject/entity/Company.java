@@ -25,9 +25,6 @@ public class Company extends Base{
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "companyName", referencedColumnName = "name")
     private Set<Product> products;
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "companyName", referencedColumnName = "name")
-//    private Set<ReturnedProductShop> returnedProductShops;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "companyName", referencedColumnName = "name")
     private Set<ReturnedtoCompany> returnedtoCompanies;
