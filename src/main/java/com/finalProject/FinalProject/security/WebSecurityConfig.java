@@ -98,7 +98,7 @@ private static final String[] PUBLIC_URLS = {"/swagger-ui/**","/v3/api-docs/**",
 //              .requestMatchers("/api/users/**").permitAll()
               .requestMatchers("/swagger-ui/**").permitAll()
               .requestMatchers("/v3/api-docs/**").permitAll()
-//              .requestMatchers("/api/products/productsWithImage").permitAll()
+              .requestMatchers("/api/products/productsWithImage").permitAll()
               .anyRequest().authenticated()
         );
     
