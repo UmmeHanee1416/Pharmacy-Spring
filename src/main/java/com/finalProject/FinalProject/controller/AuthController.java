@@ -98,39 +98,39 @@ public class AuthController {
 
         Set<String> strRoles = userDto.getRoles();
 //        Set<Role> roles = new HashSet<>();
-        Set<Role> roles = roleRepository.findAllById(userDto.getRoles() == null ? Collections.emptyList() : userDto.getRoles()).stream().collect(Collectors.toSet());
-        if (roles.size() != (userDto.getRoles() == null ? 0 : userDto.getRoles().size())) {
+        Set<Role> roles = roleRepository.findAllById(strRoles == null ? Collections.emptyList() : strRoles).stream().collect(Collectors.toSet());
+        if (roles.size() != (strRoles == null ? 0 : strRoles.size())) {
             throw new RuntimeException("one of role01s not found");
         }
-        user.setRoles(new HashSet<>(roles));
+//        user.setRoles(new HashSet<>(roles));
 //
-//        if (strRoles != null) {
-//            Role userRole = roleRepository.findById("USER")
-//                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//            roles.add(userRole);
-//        }
-//        else {
-//            strRoles.forEach(role -> {
-//                switch (role) {
-//                    case "ADMIN":
-//                        Role adminRole = roleRepository.findById("ADMIN")
-//                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//                        roles.add(adminRole);
-//
-//                        break;
-//                    case "MODERATOR":
-//                        Role modRole = roleRepository.findById("MODERATOR")
-//                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//                        roles.add(modRole);
-//
-//                        break;
-//                    default:
-//                        Role userRole = roleRepository.findById("USER")
-//                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
-//                        roles.add(userRole);
-//                }
-//            });
-//        }
+        if (strRoles != null) {
+            Role userRole = roleRepository.findById("USER")
+                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            roles.add(userRole);
+        }
+        else {
+            strRoles.forEach(role -> {
+                switch (role) {
+                    case "ADMIN":
+                        Role adminRole = roleRepository.findById("ADMIN")
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(adminRole);
+
+                        break;
+                    case "MODERATOR":
+                        Role modRole = roleRepository.findById("MODERATOR")
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(modRole);
+
+                        break;
+                    default:
+                        Role userRole = roleRepository.findById("USER")
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(userRole);
+                }
+            });
+        }
 
 //        user.setRoles(roles);
         userRepository.save(user);

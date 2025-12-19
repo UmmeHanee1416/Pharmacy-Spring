@@ -92,8 +92,8 @@ private static final String[] PUBLIC_URLS = {"/swagger-ui/**","/v3/api-docs/**",
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .authorizeHttpRequests(auth -> 
           auth
-              .requestMatchers("/**").permitAll()
-//              .requestMatchers("/auth/**").permitAll()
+//              .requestMatchers("/**").permitAll()
+              .requestMatchers("/auth/**").permitAll()
 //              .requestMatchers("/roles/**").permitAll()
 //              .requestMatchers("/api/users/**").permitAll()
               .requestMatchers("/swagger-ui/**").permitAll()
